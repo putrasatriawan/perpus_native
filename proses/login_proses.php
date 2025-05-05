@@ -1,9 +1,11 @@
 <?php
+session_start();
 include '../config/database.php';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $email = sanitize_input($_POST['email']);
-    $password = sanitize_input($_POST['password']);
+    // Menghapus sanitize_input() karena tidak didefinisikan
+    $email = mysqli_real_escape_string($conn, $_POST['email']);
+    $password = $_POST['password']; // Password akan di-hash dengan SHA-1
 
     $query = "SELECT * FROM admin WHERE email = ?";
     $stmt = mysqli_prepare($conn, $query);
@@ -13,8 +15,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if (mysqli_num_rows($result) == 1) {
         $admin = mysqli_fetch_assoc($result);
-        if (password_verify($password, $admin['password'])) {
-            session_start();
+        
+        // Membandingkan password dengan SHA-1
+        if (sha1($password) === $admin['password']) {
             $_SESSION['loggedin'] = true;
             $_SESSION['email'] = $admin['email'];
             header("Location: ../dashboard.php");

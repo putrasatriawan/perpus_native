@@ -5,12 +5,12 @@ if (isset($_SESSION['loggedin'])) {
     exit;
 }
 
-include 'config/database.php';
+include __DIR__ . '/config/database.php';
 
 $error = '';
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $email = sanitize_input($_POST['email']);
-    $password = sanitize_input($_POST['password']);
+    $email = $_POST['email'];
+    $password = $_POST['password'];
 
     $query = "SELECT * FROM admin WHERE email = ?";
     $stmt = mysqli_prepare($conn, $query);
@@ -20,7 +20,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if (mysqli_num_rows($result) == 1) {
         $admin = mysqli_fetch_assoc($result);
-        if (password_verify($password, $admin['password'])) {
+        
+        // Menggunakan SHA-1 untuk memverifikasi password
+        if (sha1($password) === $admin['password']) {
             $_SESSION['loggedin'] = true;
             $_SESSION['email'] = $admin['email'];
             header("Location: dashboard.php");
