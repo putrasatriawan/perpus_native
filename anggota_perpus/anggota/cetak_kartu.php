@@ -87,7 +87,7 @@ if (!$data) {
 <body>
     <div class="card">
         <div class="card-header">
-            <img src="../assets/img/logo-universitas.png" class="logo" alt="Logo Universitas">
+            <img src="../assets/img/logo-universitas.jpg" class="logo" alt="Logo Universitas">
             <h2>KARTU ANGGOTA PERPUSTAKAAN AMARTA</h2>
         </div>
 
