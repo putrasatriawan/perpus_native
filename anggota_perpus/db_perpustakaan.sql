@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.5
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 05, 2025 at 10:01 AM
--- Server version: 10.1.38-MariaDB
--- PHP Version: 7.3.3
+-- Generation Time: May 05, 2025 at 10:40 AM
+-- Server version: 10.4.32-MariaDB
+-- PHP Version: 8.0.30
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -32,7 +31,7 @@ CREATE TABLE `anggota` (
   `id` int(11) NOT NULL,
   `nama_lengkap` varchar(100) DEFAULT NULL,
   `nomor_telepon` varchar(15) DEFAULT NULL,
-  `alamat` text,
+  `alamat` text DEFAULT NULL,
   `email` varchar(100) DEFAULT NULL,
   `jenis_kelamin` enum('Laki-laki','Perempuan') DEFAULT NULL,
   `tanggal_lahir` date DEFAULT NULL,
@@ -42,15 +41,14 @@ CREATE TABLE `anggota` (
   `tanggal_pendaftaran` date DEFAULT NULL,
   `masa_berlaku_kartu` date DEFAULT NULL,
   `foto` varchar(255) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Dumping data for table `anggota`
 --
 
 INSERT INTO `anggota` (`id`, `nama_lengkap`, `nomor_telepon`, `alamat`, `email`, `jenis_kelamin`, `tanggal_lahir`, `nim`, `fakultas`, `jurusan`, `tanggal_pendaftaran`, `masa_berlaku_kartu`, `foto`) VALUES
-(1, 'ibnu ayah amANAH', '0861231231123', 'jl cipacing', 'ibnu@gmail.com', 'Laki-laki', '2025-05-05', '209182381', 'kesehatan', 'dokter', '2025-05-05', '2025-08-05', NULL),
-(4, 'esti', '08726138172', 'margahayu', 'esti@gmail.com', 'Laki-laki', '2025-05-05', '8912397123', 'Ilmu', 'komputer', '2025-05-05', '2025-08-05', NULL);
+(4, 'Lana', '08726138172', 'margahayu', 'esti@gmail.com', 'Laki-laki', '2025-05-05', '8912397123', 'Ilmu', 'komputer', '2025-05-05', '2025-08-05', NULL);
 
 -- --------------------------------------------------------
 
@@ -62,7 +60,7 @@ CREATE TABLE `users` (
   `id` int(11) NOT NULL,
   `email` varchar(100) DEFAULT NULL,
   `password` varchar(255) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Dumping data for table `users`
@@ -70,7 +68,7 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `email`, `password`) VALUES
 (1, 'joki@techanus.com', 'password'),
-(2, 'ibnu@gmail.com', 'admin');
+(2, 'admin@techanus.com', 'admin');
 
 --
 -- Indexes for dumped tables
